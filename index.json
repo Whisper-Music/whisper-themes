@@ -22,11 +22,11 @@
       "name": "Мел",
       "author": "Whisper Music",
       "description": "Школьная доска: всё нарисовано мелом, только белое и серое",
-      "version": "1.1",
+      "version": "1.2",
       "base": "neon",
       "file": "themes/chalk.wmt",
       "preview": "previews/chalk.jpg",
-      "size": 421703,
+      "size": 422096,
       "tags": [
         "чёрно-белая",
         "рисованная"
