@@ -1,0 +1,100 @@
+#WMT 1
+# Whisper Music Theme — «Терминал»: весь интерфейс — командная строка.
+# Нужна версия приложения с поддержкой консоли (settings → "console"). Описание формата: docs/WMT-FORMAT.md
+# Как поставить: Настройки → Оформление → Стиль оформления → «Загрузить тему» (или перетащи файл в окно).
+# Цвет текста — основной цвет (tokens.color.accent; в консоли: color #rrggbb), подсветка — второй (color2).
+# Фон — как у любого стиля: bg file / bg desktop / bg cover on, или перетащи картинку в окно.
+# Вернуться к обычному интерфейсу: команда gui (или Ctrl+Shift+Backspace).
+
+@@ manifest
+{
+  "id": "terminal",
+  "name": "Терминал",
+  "author": "Whisper Music",
+  "description": "Командная строка вместо окна: help — список команд",
+  "version": "1.0",
+  "base": "neon",
+  "apps": ["whisper-music", "whisper-obs"],
+  "created": "2026-10-23T00:00:00Z"
+}
+
+@@ tokens
+{
+  "color": {
+    "accent": "#39ff7a",
+    "accent2": "#b8ffcf",
+    "text": "#c9ffd9",
+    "muted": "#5fae7a",
+    "background": "#020604"
+  },
+  "effects": {
+    "glow": 10,
+    "panelOpacity": 0.82,
+    "dim": 0.3,
+    "backgroundBlur": 4
+  },
+  "font": {
+    "body": "\"Cascadia Mono\", Consolas, \"DejaVu Sans Mono\", monospace",
+    "display": "\"Cascadia Mono\", Consolas, monospace"
+  }
+}
+
+@@ settings whisper-music
+{
+  "features": { "glow": true, "panelOpacity": true, "animations": true },
+  "layout": "fixed",
+  "console": {
+    "prompt": "user@whisper:~$",
+    "banner": " _      __ __   _                        \n| | /| / // /  (_)___ ___  ___  ____     \n| |/ |/ // _ \\/ /(_-</ _ \\/ -_)/ __/     \n|__/|__//_//_/_//___/ .__/\\__//_/   v1.0\n                   /_/                    \nWhisper Edition · Яндекс Музыка в терминале"
+  }
+}
+
+@@ css whisper-music
+/* окно: только заголовок с кнопками и консоль */
+.titlebar { background: rgba(0, 0, 0, .55); border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+.tbtitle, .tbbrand { color: var(--accent); font-family: "Cascadia Mono", Consolas, monospace; }
+.tbctl button { color: var(--accent); }
+.tbctl button:hover { background: color-mix(in srgb, var(--accent) 18%, transparent); }
+.tbctl .wclose:hover { background: #c42b1c; color: #fff; }
+
+/* консоль */
+#cli {
+  font-size: 14.5px;
+  border-top: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse 120% 90% at 50% 50%, transparent 55%, rgba(0, 0, 0, .55) 100%),
+    rgba(0, 4, 2, var(--panel-a));
+}
+#cli .cl.banner { color: var(--accent); line-height: 1.15; font-weight: 400; }
+#cli .cl.cmd { color: var(--accent2); }
+#cli .cl.hd { text-transform: uppercase; letter-spacing: .12em; font-size: 12.5px; }
+#cli .cl.hd::before { content: "## "; opacity: .6; }
+#cli .cl.err::before { content: "! "; }
+#cli .cli-status {
+  border-top: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  padding: 4px 8px; margin: 0 -8px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+#cli .cli-in input { caret-color: var(--accent); }
+#cli .cli-out::-webkit-scrollbar { width: 8px; }
+#cli .cli-out::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 0; }
+::selection { background: var(--accent); color: #020604; text-shadow: none; }
+
+/* окна поверх консоли (полноэкранный плеер с текстом, эквалайзер, «Слушать вместе», модальные окна) — в тон */
+.modalbox, .tmenu, .toast { font-family: "Cascadia Mono", Consolas, monospace; border-radius: 0; background: rgba(0, 6, 3, .96); border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); color: var(--accent); box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 20%, transparent); }
+.modalbox .nav, .modalbox .field { border-radius: 0; }
+
+@@ settings whisper-obs
+{ "layout": "bar", "opacity": 0.75 }
+
+@@ css whisper-obs
+/* виджет для OBS в духе терминала */
+.w { --r: 0px; font-family: "Cascadia Mono", Consolas, monospace; color: var(--a); }
+.w-bg { background: rgba(0, 6, 3, var(--alpha)); border: 1px solid color-mix(in srgb, var(--a) 55%, transparent); box-shadow: 0 0 18px color-mix(in srgb, var(--a) 25%, transparent); }
+.w-title, .w-artist { text-shadow: 0 0 6px color-mix(in srgb, var(--a) 60%, transparent); }
+.w-title::before { content: "> "; opacity: .7; }
+.w-bar { border-radius: 0; background: color-mix(in srgb, var(--a) 15%, transparent); }
+.w-bar i { border-radius: 0; background: var(--a); }
+.w-eq i { border-radius: 0; background: var(--a); }

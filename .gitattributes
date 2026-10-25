@@ -1,0 +1,7 @@
+*.wmt binary
+*.jpg binary
+*.png binary
+*.webp binary
+*.json text eol=lf
+*.js text eol=lf
+*.md text eol=lf

@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "themes": [
+    {
+      "id": "chalk",
+      "name": "Мел",
+      "author": "Whisper Music",
+      "description": "Школьная доска: всё нарисовано мелом, только белое и серое",
+      "version": "1.0",
+      "base": "neon",
+      "file": "themes/chalk.wmt",
+      "preview": "previews/chalk.jpg",
+      "size": 421615,
+      "tags": [
+        "чёрно-белая",
+        "рисованная"
+      ]
+    },
+    {
+      "id": "night-sky",
+      "name": "Ночное небо",
+      "author": "Whisper Music",
+      "description": "Синий акцент и звёздный фон — пример темы",
+      "version": "",
+      "base": "neon",
+      "file": "themes/night-sky.wmt",
+      "preview": "previews/night-sky.jpg",
+      "size": 49190,
+      "tags": [
+        "синяя",
+        "звёзды"
+      ]
+    },
+    {
+      "id": "retro-tv",
+      "name": "Телевизор",
+      "author": "Whisper Music",
+      "description": "Ламповый телевизор: пиксельные надписи, ручки громкости и каналов",
+      "version": "1.0",
+      "base": "neon",
+      "file": "themes/retro-tv.wmt",
+      "preview": "previews/retro-tv.jpg",
+      "size": 39253,
+      "tags": [
+        "ретро",
+        "пиксели",
+        "своя раскладка"
+      ]
+    },
+    {
+      "id": "terminal",
+      "name": "Терминал",
+      "author": "Whisper Music",
+      "description": "Командная строка вместо окна: help — список команд",
+      "version": "1.0",
+      "base": "neon",
+      "file": "themes/terminal.wmt",
+      "preview": "previews/terminal.jpg",
+      "size": 5079,
+      "tags": [
+        "консоль",
+        "зелёная"
+      ]
+    }
+  ]
+}
