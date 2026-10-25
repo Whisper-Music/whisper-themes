@@ -1,0 +1,333 @@
+#WMT 1
+# Whisper Music Theme — «Windows 98»: серые окна, синие заголовки, бирюзовый рабочий стол, старые кнопки.
+# Без свечения, скруглений и анимаций. Основа — «Неон» (у него нет декоративных бантов и рамок).
+# Загрузка: Настройки → Стиль оформления → «Загрузить тему». Ctrl+Shift+Backspace — вернуть встроенный стиль.
+
+@@ manifest
+{
+  "id": "windows-98",
+  "name": "Windows 98",
+  "author": "Whisper Music",
+  "description": "Серые окна, синие заголовки, старые кнопки",
+  "version": "1.0",
+  "base": "neon",
+  "apps": ["whisper-music"]
+}
+
+@@ tokens
+{
+  "color": {
+    "accent": "#000080",     // тёмно-синий: заголовки окон, выделение
+    "accent2": "#1084d0",    // голубой край градиента заголовка
+    "text": "#000000",
+    "muted": "#404040",
+    "background": "#008080"  // бирюзовый рабочий стол
+  },
+  "effects": {
+    "glow": 0,
+    "panelOpacity": 1,
+    "dim": 0,
+    "backgroundBlur": 0
+  },
+  "font": {
+    "body": "Tahoma, \"Microsoft Sans Serif\", \"MS Sans Serif\", Arial, sans-serif",
+    "display": "Tahoma, \"Microsoft Sans Serif\", Arial, sans-serif"
+  }
+}
+
+@@ settings whisper-music
+{
+  // В Windows 98 нет свечения и анимаций — эти настройки в приложении не показываются.
+  // Прозрачность окон оставлена: по умолчанию окна непрозрачные, но ползунок «Прозрачность панелей» работает.
+  "features": {
+    "glow": false,
+    "panelOpacity": true,
+    "animations": false
+  }
+}
+
+@@ css whisper-music
+/* ===================== Windows 98 =====================
+   Палитра и объём — как в классическом оформлении Windows:
+   поверхность #c0c0c0, свет #ffffff/#dfdfdf, тень #808080/#0a0a0a.
+   Заголовки окон и выделение — «Основной» и «Второй» цвета из настроек (по умолчанию #000080 → #1084d0),
+   рабочий стол — tokens.color.background (или «Фон окна» в тонкой настройке цветов, или своя картинка). */
+
+:root {
+  --w-face: #c0c0c0;
+  --w-hi: #ffffff;
+  --w-light: #dfdfdf;
+  --w-shadow: #808080;
+  --w-dark: #0a0a0a;
+  --w-navy: var(--accent);
+  --w-blue: var(--accent2);
+  --w-desk: #008080;
+  /* объём: выпуклое (окно, кнопка), вдавленное (поле, список), нажатая кнопка */
+  --w-raised: inset -1px -1px var(--w-dark), inset 1px 1px var(--w-hi), inset -2px -2px var(--w-shadow), inset 2px 2px var(--w-light);
+  --w-sunken: inset -1px -1px var(--w-hi), inset 1px 1px var(--w-shadow), inset -2px -2px var(--w-light), inset 2px 2px var(--w-dark);
+  --w-pressed: inset -1px -1px var(--w-hi), inset 1px 1px var(--w-dark), inset -2px -2px var(--w-light), inset 2px 2px var(--w-shadow);
+  --w-thin-sunken: inset 1px 1px var(--w-shadow), inset -1px -1px var(--w-hi);
+  --w-caption: linear-gradient(90deg, var(--w-navy), var(--w-blue));
+  --page-tint: transparent;
+  --glow: 0px;
+  --glow-c: transparent;
+  --btn-glow: transparent;
+  --btn-fill: var(--w-face);
+  --on-accent: #000000;
+  --on-accent-shadow: none;
+  /* поверхность окон с учётом ползунка «Прозрачность панелей» (--panel-a ставит приложение) */
+  --w-win: color-mix(in srgb, var(--w-face) calc(var(--panel-a) * 100%), transparent);
+}
+
+/* ---------- без мишуры: никаких скруглений, теней-свечений, размытий и анимаций ---------- */
+*, *::before, *::after {
+  border-radius: 0 !important;
+  text-shadow: none !important;
+  animation: none !important;
+  transition: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* ---------- рабочий стол ----------
+   Цвет — из tokens.color.background; своя картинка из настроек ложится поверх, как обои. */
+body {
+  background-image: none !important;
+  color: #000;
+  font-size: 13px;
+}
+
+/* ---------- заголовок программы — как заголовок окна ---------- */
+.titlebar { height: 26px; background: var(--w-caption); border: 0; box-shadow: none; }
+.tbtitle { color: #fff; padding-left: 8px; }
+.tbdot { display: none; }
+.tbbrand { font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 0; text-transform: none; font-family: inherit; }
+.tbsubtitle { font-size: 10px; color: var(--w-light); letter-spacing: 0; text-transform: none; }
+.tbtext { flex-direction: row; align-items: baseline; gap: 6px; }
+.tbctl { gap: 2px; align-items: center; padding-right: 3px; }
+.tbctl button {
+  width: 18px; height: 16px; padding: 0; color: #000; background: var(--w-face); box-shadow: var(--w-raised);
+}
+.tbctl button:hover { background: var(--w-face); color: #000; }
+.tbctl button:active { box-shadow: var(--w-pressed); }
+.tbctl .wclose { margin-left: 2px; }
+.tbctl .wclose:hover { background: var(--w-face); color: #000; }
+.tbctl svg { width: 9px; height: 9px; stroke-width: 2; }
+.app { padding-top: 32px; }
+
+/* ---------- окна ---------- */
+.panel, .main, .stations { background: var(--w-win) !important; }
+.login-box, .tmenu, .toast { background: var(--w-face) !important; }     /* меню и диалоги — всегда сплошные */
+.panel, .main, .stations, .login-box, .tmenu, .toast {
+  color: #000;
+  border: 0 !important;
+  box-shadow: var(--w-raised) !important;
+  outline: 0;
+}
+.panel::before, .panel::after { display: none; }
+.side { padding: 3px 6px 8px; }
+.player { padding: 10px 14px 8px !important; border: 0 !important; }
+
+/* средняя область — тоже окно со своим синим заголовком */
+.main { padding: 3px 10px 10px 6px; }
+.main::before {
+  content: "Whisper Music";
+  position: sticky; top: 0; z-index: 7;
+  display: block; flex: none;
+  margin: 0 -7px 10px -3px; padding: 3px 6px;
+  background: var(--w-caption); color: #fff; font-size: 12px; font-weight: 700;
+  box-shadow: 0 -3px 0 var(--w-face);       /* при прокрутке содержимое не выглядывает над заголовком */
+}
+.side::before {
+  content: "Меню"; display: block !important;
+  margin: 0 -3px 6px; padding: 3px 6px;
+  background: var(--w-caption); color: #fff; font-size: 12px; font-weight: 700;
+}
+
+/* заголовки разделов */
+.head { margin: 2px 0 10px; }
+.head h2, .main.wavemode .head h2 {
+  font-family: inherit; font-size: 22px; font-weight: 700; letter-spacing: 0; color: #000;
+  background: none; -webkit-text-fill-color: currentColor; filter: none;
+}
+.headimg { box-shadow: var(--w-sunken); padding: 2px; background: var(--w-face); }
+.sub, .status, .a, .meta span, .time { color: #404040; }
+h3, .card h3 { color: #000; font-family: inherit; letter-spacing: 0; }
+
+/* ---------- кнопки ---------- */
+.nav, .chip, .pill, .round, .player button, .vizfsbtn, .wavebtn, .tact, .droplink, .qmore, .qclear, .qclose,
+.fbtns button, .fclose, .stylecard, .modalbox .nav, .login-box .nav, button.more {
+  background: var(--w-face) !important;
+  color: #000 !important;
+  border: 0 !important;
+  box-shadow: var(--w-raised) !important;
+  font-weight: 400;
+  filter: none !important;
+  transform: none !important;
+}
+.nav, .chip, .pill { padding: 6px 12px; }
+.nav:hover, .chip:hover, .pill:hover, .round:hover, .player button:hover, .vizfsbtn:hover, .wavebtn:hover, .stylecard:hover {
+  background: var(--w-face) !important;
+}
+.nav:active:not(:disabled), .chip:active, .pill:active, .round:active, .player button:active, .vizfsbtn:active,
+.wavebtn:active, .tact:active, .droplink:active, .qmore:active, .qclear:active, .qclose:active, .fbtns button:active {
+  box-shadow: var(--w-pressed) !important;
+}
+/* выбранное — «утопленная» кнопка */
+.nav.active, .chip.active, .pill.active, .stations .pill.active, .stylecard.on, .player .modebtn.on, .qtoggle.on {
+  background: repeating-conic-gradient(var(--w-face) 0 25%, var(--w-hi) 0 50%) 0 0 / 2px 2px !important;
+  box-shadow: var(--w-pressed) !important;
+  color: #000 !important;
+  font-weight: 700;
+}
+.player .modebtn.on, .qtoggle.on { color: var(--w-navy) !important; }
+.nav:disabled, .player button:disabled { color: var(--w-shadow) !important; text-shadow: 1px 1px 0 var(--w-hi) !important; }
+.nav.danger { color: #800000 !important; }
+.nav:focus-visible, .chip:focus-visible, .player button:focus-visible { outline: 1px dotted #000; outline-offset: -5px; }
+.side .nav { text-align: left; }
+
+/* кнопка «Пуск» плеера и «Моя волна» — обычные квадратные кнопки */
+.player .playbtn { width: 48px !important; height: 48px !important; color: #000 !important; }
+.player .playbtn svg { width: 24px; height: 24px; }
+.wavebtn { width: 96px; height: 96px; color: #000 !important; }
+.wavebtn svg { width: 44px; height: 44px; }
+
+/* мелкий серый текст в блоках: в общем оформлении он осветлён под тёмные стили — здесь нужен тёмный */
+:is(.settings > .card, .stats .card, .main .list, .main .lastAlbum, .main .similar, .main .plpage, .main .sub, .main > .status) {
+  --muted: #404040;
+}
+.wmthint, .stylecard small, .slide, .swatch, .ccnote, .dlpath small { color: #404040 !important; }
+
+/* значки в строках списков — плоские, объём появляется при наведении (как на панели инструментов) */
+.likebtn, .morebtn, .qx, #dlBtn, .player .pinfo .likebtn, .player #dlBtn {
+  background: transparent !important; color: #000 !important; opacity: 1 !important; filter: none !important; box-shadow: none !important;
+}
+.likebtn:hover, .morebtn:hover, .qx:hover, .player .pinfo .likebtn:hover, .player #dlBtn:hover { box-shadow: var(--w-raised) !important; background: var(--w-face) !important; }
+.likebtn.on, .player .pinfo .likebtn.on { color: #a00000 !important; }
+.gotmark { color: var(--w-navy); filter: none; border: 0; background: none; }
+
+/* ---------- верхние вкладки — как закладки диалога ---------- */
+.tabs { padding: 4px 4px 0; gap: 2px; margin: 0; background: none; }
+.tab {
+  padding: 4px 12px; background: var(--w-face) !important; color: #000 !important; border: 0 !important;
+  box-shadow: inset 1px 1px var(--w-hi), inset -1px 0 var(--w-dark), inset -2px 0 var(--w-shadow), inset 2px 2px var(--w-light) !important;
+  transform: none !important;
+}
+.tab::before, .tab::after, .tab .lodeco { display: none !important; }
+.tab.active { font-weight: 700; padding-top: 6px; margin-top: -2px; }
+.tab small { color: #404040; }
+
+/* ---------- поля ввода ---------- */
+.search, input[type=password], input[type=text], .field {
+  background: #fff !important; color: #000 !important; border: 0 !important;
+  box-shadow: var(--w-sunken) !important; padding: 5px 7px;
+}
+.search::placeholder, .field::placeholder { color: var(--w-shadow); }
+.search:focus, .field:focus { box-shadow: var(--w-sunken) !important; }
+
+/* ---------- ползунки — как регуляторы Windows ---------- */
+input[type=range] { height: 22px; }
+input[type=range]::-webkit-slider-runnable-track,
+#seek::-webkit-slider-runnable-track, #fSeek::-webkit-slider-runnable-track, #vol::-webkit-slider-runnable-track,
+.settings input[type=range]::-webkit-slider-runnable-track {
+  height: 4px; background: var(--w-face) !important; box-shadow: var(--w-thin-sunken), inset -2px -2px var(--w-light), inset 2px 2px var(--w-dark);
+}
+input[type=range]::-webkit-slider-thumb,
+#seek::-webkit-slider-thumb, #fSeek::-webkit-slider-thumb {
+  width: 11px; height: 20px; margin-top: -8px; border-radius: 0 !important;
+  background: var(--w-face) !important; box-shadow: var(--w-raised) !important;
+}
+/* выбор цвета — квадратик в утопленной рамке */
+input[type=color] { border-radius: 0 !important; box-shadow: var(--w-sunken); background: var(--w-face); padding: 3px; border: 0; }
+input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
+input[type=color]::-webkit-color-swatch { border-radius: 0 !important; border: 0; }
+.volpop { background: var(--w-face); box-shadow: var(--w-raised); border: 0; }
+.volval { color: #000; }
+
+/* ---------- переключатели — флажки ---------- */
+.switch i { width: 13px; height: 13px; background: #fff !important; box-shadow: var(--w-sunken) !important; }
+.switch i::after { top: 0; left: 0; width: 13px; height: 13px; background: transparent; box-shadow: none; transform: none !important; }
+.switch input:checked + i { background: #fff !important; box-shadow: var(--w-sunken) !important; }
+.switch input:checked + i::after {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 13'%3E%3Cpath d='M3 6l2 2 5-5v2l-5 5-2-2z' fill='%23000'/%3E%3C/svg%3E") center / 13px 13px no-repeat;
+}
+
+/* ---------- списки треков — белое поле со вдавленной рамкой, выделение синим ---------- */
+.main .list:not(:empty), .qbody .list, #plRecList:not(:empty) {
+  background: #fff !important; border: 0 !important; box-shadow: var(--w-sunken) !important; padding: 3px !important; outline: 0 !important;
+}
+.list li { padding: 3px 6px; gap: 10px; background: none; box-shadow: none !important; transform: none !important; }
+.list li + li { border-top: 0; }
+.list li:hover { background: none; }
+.list li:hover .t { text-decoration: underline; }
+.list li.playing { background: var(--w-navy) !important; }
+.list li.playing .t, .list li.playing .a, .list li.playing .art, .list li.playing .qtime,
+.list li.playing .likebtn, .list li.playing .morebtn, .list li.playing .gotmark { color: #fff !important; }
+.list .t { color: #000; font-family: inherit; font-size: 13px; letter-spacing: 0; }
+.list .a, .list .a a { color: #404040; }
+.list img, .cover, .simcard img, .lastAlbum img, .stalbum img {
+  background: var(--w-face); box-shadow: var(--w-thin-sunken); border: 0 !important; outline: 0 !important;
+}
+.list img { width: 36px; height: 36px; }
+.grip { color: #000; }
+
+/* ---------- карточки настроек, статистики — рамка группы ---------- */
+.card, .lastAlbum, .stbox, .settings > .card, .stats .card {
+  background: transparent !important;
+  border: 1px solid var(--w-shadow) !important;
+  box-shadow: inset 1px 1px var(--w-hi), 1px 1px var(--w-hi) !important;
+  outline: 0 !important;
+}
+.simcard:hover { background: rgba(0, 0, 128, .12); }
+.simcard b, .lastAlbum b { color: #000; font-family: inherit; }
+.dlpath { background: #fff; box-shadow: var(--w-sunken); }
+.drop { border: 1px dashed #000 !important; background: var(--w-face) !important; color: #000; box-shadow: none !important; }
+.drop.over { background: var(--w-light) !important; }
+.sprev { box-shadow: var(--w-thin-sunken) !important; }
+
+/* ---------- меню трека и подсказки ---------- */
+.tmenu { padding: 3px; }
+.tmenu button { color: #000; padding: 5px 20px 5px 8px; }
+.tmenu button svg { color: #000; }
+.tmenu button:hover { background: var(--w-navy) !important; color: #fff; }
+.tmenu button:hover svg { color: #fff; }
+.tmenu .msep { border: 0; border-top: 1px solid var(--w-shadow); border-bottom: 1px solid var(--w-hi); margin: 3px 2px; }
+.toast { color: #000; }
+
+/* ---------- диалоги ---------- */
+.login { background: rgba(0, 0, 0, .15); }
+.login-box { padding: 3px 12px 14px; gap: 10px; }
+.login-box h2 {
+  margin: 0 -9px 6px; padding: 3px 6px; font-size: 12px; font-weight: 700;
+  background: var(--w-caption); color: #fff;
+}
+
+/* ---------- панель «Очередь и история» ---------- */
+.qhead { margin: 3px 3px 6px; padding: 3px 3px 3px 6px !important; background: var(--w-caption); color: #fff; }
+.qhead b { font-size: 12px; }
+.qclose { width: 18px; height: 16px; }
+.qsec h4 { color: #000; }
+.qday { color: #404040; }
+
+/* ---------- Моя волна и полноэкранный режим ---------- */
+.stations { padding: 6px; }
+.full { background: var(--w-desk); }
+.full::after, .fbg { display: none; }
+.full .ftitle, .full .fartist, .full .time { color: #fff; }
+.vizfull { background: var(--w-desk); }
+
+/* ---------- полосы прокрутки — классические ---------- */
+::-webkit-scrollbar { width: 16px; height: 16px; }
+::-webkit-scrollbar-track { background: repeating-conic-gradient(var(--w-face) 0 25%, var(--w-hi) 0 50%) 0 0 / 2px 2px; }
+::-webkit-scrollbar-thumb { background: var(--w-face); box-shadow: var(--w-raised); border: 0; }
+::-webkit-scrollbar-button:single-button { display: block; width: 16px; height: 16px; background-color: var(--w-face); box-shadow: var(--w-raised); background-repeat: no-repeat; background-position: center; }
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='4'%3E%3Cpath d='M3.5 0L7 4H0z'/%3E%3C/svg%3E");
+}
+::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='4'%3E%3Cpath d='M0 0h7L3.5 4z'/%3E%3C/svg%3E");
+}
+::-webkit-scrollbar-button:single-button:active { box-shadow: var(--w-pressed); }
+::-webkit-scrollbar-corner { background: var(--w-face); }
+.main::-webkit-scrollbar { width: 16px; }
+.main::-webkit-scrollbar-thumb { background: var(--w-face); box-shadow: var(--w-raised); }

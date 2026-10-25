@@ -2,15 +2,31 @@
   "format": 1,
   "themes": [
     {
+      "id": "axiom",
+      "name": "Аксиома",
+      "author": "Whisper Music",
+      "description": "Тёмная математическая геометрия: кольца, орбиты, треугольники и яркие цветные примитивы.",
+      "version": "1.1",
+      "base": "neon",
+      "file": "themes/axiom.wmt",
+      "preview": "previews/axiom.jpg",
+      "size": 189811,
+      "tags": [
+        "геометрия",
+        "тёмная",
+        "яркая"
+      ]
+    },
+    {
       "id": "chalk",
       "name": "Мел",
       "author": "Whisper Music",
       "description": "Школьная доска: всё нарисовано мелом, только белое и серое",
-      "version": "1.0",
+      "version": "1.1",
       "base": "neon",
       "file": "themes/chalk.wmt",
       "preview": "previews/chalk.jpg",
-      "size": 421615,
+      "size": 421703,
       "tags": [
         "чёрно-белая",
         "рисованная"
@@ -60,6 +76,38 @@
       "tags": [
         "консоль",
         "зелёная"
+      ]
+    },
+    {
+      "id": "cartoon",
+      "name": "Cartoon",
+      "author": "Whisper Music",
+      "description": "Тёмный комикс: толстая ink-обводка, жёсткие тени, жёлто-фиолетовый акцент",
+      "version": "1.1",
+      "base": "neon",
+      "file": "themes/cartoon.wmt",
+      "preview": "previews/cartoon.jpg",
+      "size": 377399,
+      "tags": [
+        "комикс",
+        "тёмная",
+        "фиолетовая"
+      ]
+    },
+    {
+      "id": "windows-98",
+      "name": "Windows 98",
+      "author": "Whisper Music",
+      "description": "Серые окна, синие заголовки, старые кнопки",
+      "version": "1.0",
+      "base": "neon",
+      "file": "themes/windows-98.wmt",
+      "preview": "previews/windows-98.jpg",
+      "size": 17990,
+      "tags": [
+        "ретро",
+        "светлая",
+        "классика"
       ]
     }
   ]
