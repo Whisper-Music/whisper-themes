@@ -150,6 +150,47 @@
         "светлая",
         "классика"
       ]
+    },
+    {
+      "id": "lazzy2wice",
+      "category": "artists",
+      "name": "Цикл",
+      "author": "Whisper Music",
+      "artist": "LAZZY2WICE",
+      "description": "Сепия, ржавчина и кардиограмма: в тишине всё выцветает и шумит, музыка возвращает цвет и пульс. «Моя волна» — глаз, меню — стальная плита. Есть мат",
+      "version": "1.2",
+      "base": "neon",
+      "file": "themes/artists/lazzy2wice.wmt",
+      "preview": "previews/artists/lazzy2wice.jpg",
+      "size": 463449,
+      "tags": [
+        "тёмная",
+        "сепия",
+        "ржавчина",
+        "своя раскладка",
+        "трэп-метал"
+      ]
+    },
+    {
+      "id": "madk1d",
+      "category": "artists",
+      "name": "sexyswag",
+      "author": "Whisper Music",
+      "artist": "madk1d",
+      "description": "Интернет-угар 2010-го: глянец, стикеры, блёстки и хром. Плеер — «моя страница» со статусом «в сети», «Моя волна» — голографический CD, под бравадой «мне всё равно» прячется «не всё равно»",
+      "version": "1.1",
+      "base": "neon",
+      "file": "themes/artists/madk1d.wmt",
+      "preview": "previews/artists/madk1d.jpg",
+      "size": 191650,
+      "tags": [
+        "розовая",
+        "яркая",
+        "глянец",
+        "2010",
+        "своя раскладка",
+        "гиперпоп"
+      ]
     }
   ]
 }
