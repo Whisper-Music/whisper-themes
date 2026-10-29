@@ -1,15 +1,33 @@
 {
-  "format": 1,
+  "format": 2,
+  "categories": [
+    {
+      "id": "whisper",
+      "name": "Whisper Music",
+      "description": "Темы от автора приложения"
+    },
+    {
+      "id": "community",
+      "name": "Пользователи",
+      "description": "Темы, которые прислали пользователи"
+    },
+    {
+      "id": "artists",
+      "name": "По артистам",
+      "description": "Темы в стиле конкретного исполнителя"
+    }
+  ],
   "themes": [
     {
       "id": "axiom",
+      "category": "whisper",
       "name": "Аксиома",
       "author": "Whisper Music",
       "description": "Тёмная математическая геометрия: кольца, орбиты, треугольники и яркие цветные примитивы.",
       "version": "1.1",
       "base": "neon",
-      "file": "themes/axiom.wmt",
-      "preview": "previews/axiom.jpg",
+      "file": "themes/whisper/axiom.wmt",
+      "preview": "previews/whisper/axiom.jpg",
       "size": 189811,
       "tags": [
         "геометрия",
@@ -19,14 +37,15 @@
     },
     {
       "id": "chalk",
+      "category": "whisper",
       "name": "Мел",
       "author": "Whisper Music",
-      "description": "Школьная доска: всё нарисовано мелом, только белое и серое",
-      "version": "1.2",
+      "description": "Школьная доска: всё нарисовано мелом, белое и серое — только обложки в цвете",
+      "version": "1.3",
       "base": "neon",
-      "file": "themes/chalk.wmt",
-      "preview": "previews/chalk.jpg",
-      "size": 422096,
+      "file": "themes/whisper/chalk.wmt",
+      "preview": "previews/whisper/chalk.jpg",
+      "size": 503189,
       "tags": [
         "чёрно-белая",
         "рисованная"
@@ -34,13 +53,14 @@
     },
     {
       "id": "night-sky",
+      "category": "whisper",
       "name": "Ночное небо",
       "author": "Whisper Music",
       "description": "Синий акцент и звёздный фон — пример темы",
       "version": "",
       "base": "neon",
-      "file": "themes/night-sky.wmt",
-      "preview": "previews/night-sky.jpg",
+      "file": "themes/whisper/night-sky.wmt",
+      "preview": "previews/whisper/night-sky.jpg",
       "size": 49190,
       "tags": [
         "синяя",
@@ -48,14 +68,32 @@
       ]
     },
     {
+      "id": "spetsnaz",
+      "category": "whisper",
+      "name": "Спецназ",
+      "author": "Whisper Music",
+      "description": "Мрачный графит спецподразделения: бетон, кевлар, сталь, красные индикаторы, прицел вокруг «Моей волны»",
+      "version": "1.0",
+      "base": "neon",
+      "file": "themes/whisper/spetsnaz.wmt",
+      "preview": "previews/whisper/spetsnaz.jpg",
+      "size": 359928,
+      "tags": [
+        "тёмная",
+        "серая",
+        "строгая"
+      ]
+    },
+    {
       "id": "retro-tv",
+      "category": "whisper",
       "name": "Телевизор",
       "author": "Whisper Music",
       "description": "Ламповый телевизор: пиксельные надписи, ручки громкости и каналов",
       "version": "1.0",
       "base": "neon",
-      "file": "themes/retro-tv.wmt",
-      "preview": "previews/retro-tv.jpg",
+      "file": "themes/whisper/retro-tv.wmt",
+      "preview": "previews/whisper/retro-tv.jpg",
       "size": 39253,
       "tags": [
         "ретро",
@@ -65,13 +103,14 @@
     },
     {
       "id": "terminal",
+      "category": "whisper",
       "name": "Терминал",
       "author": "Whisper Music",
       "description": "Командная строка вместо окна: help — список команд",
       "version": "1.0",
       "base": "neon",
-      "file": "themes/terminal.wmt",
-      "preview": "previews/terminal.jpg",
+      "file": "themes/whisper/terminal.wmt",
+      "preview": "previews/whisper/terminal.jpg",
       "size": 5079,
       "tags": [
         "консоль",
@@ -80,13 +119,14 @@
     },
     {
       "id": "cartoon",
+      "category": "whisper",
       "name": "Cartoon",
       "author": "Whisper Music",
       "description": "Тёмный комикс: толстая ink-обводка, жёсткие тени, жёлто-фиолетовый акцент",
       "version": "1.1",
       "base": "neon",
-      "file": "themes/cartoon.wmt",
-      "preview": "previews/cartoon.jpg",
+      "file": "themes/whisper/cartoon.wmt",
+      "preview": "previews/whisper/cartoon.jpg",
       "size": 377399,
       "tags": [
         "комикс",
@@ -96,13 +136,14 @@
     },
     {
       "id": "windows-98",
+      "category": "whisper",
       "name": "Windows 98",
       "author": "Whisper Music",
       "description": "Серые окна, синие заголовки, старые кнопки",
       "version": "1.0",
       "base": "neon",
-      "file": "themes/windows-98.wmt",
-      "preview": "previews/windows-98.jpg",
+      "file": "themes/whisper/windows-98.wmt",
+      "preview": "previews/whisper/windows-98.jpg",
       "size": 17990,
       "tags": [
         "ретро",
