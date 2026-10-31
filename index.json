@@ -118,6 +118,25 @@
       ]
     },
     {
+      "id": "ascii",
+      "category": "whisper",
+      "name": "ASCII",
+      "author": "Whisper Music",
+      "description": "Всё окно нарисовано символами: рамки +---+, [кнопки], vol [▮▮▮▯] 80%, обложки из букв, фон — ASCII-картина, «Моя волна» — крутящийся пончик из donut.c",
+      "version": "1.2",
+      "base": "neon",
+      "file": "themes/whisper/ascii.wmt",
+      "preview": "previews/whisper/ascii.jpg",
+      "size": 249756,
+      "tags": [
+        "ascii",
+        "текст",
+        "моноширинная",
+        "тёмная",
+        "ретро"
+      ]
+    },
+    {
       "id": "cartoon",
       "category": "whisper",
       "name": "Cartoon",
@@ -169,6 +188,25 @@
         "ржавчина",
         "своя раскладка",
         "трэп-метал"
+      ]
+    },
+    {
+      "id": "lazzy2wice-lite",
+      "category": "artists",
+      "name": "Цикл · тихо",
+      "author": "Whisper Music",
+      "artist": "LAZZY2WICE",
+      "description": "Спокойная версия «Цикла»: сепия в тишине и цвет с музыкой, перемотка-кардиограмма, кровь на кости — без шума и перегруза",
+      "version": "1.5",
+      "base": "neon",
+      "file": "themes/artists/lazzy2wice-lite.wmt",
+      "preview": "previews/artists/lazzy2wice-lite.jpg",
+      "size": 24622,
+      "tags": [
+        "тёмная",
+        "сепия",
+        "минимализм",
+        "спокойная"
       ]
     },
     {
