@@ -177,11 +177,11 @@
       "name": "Whisper Old",
       "author": "Whisper Music",
       "description": "Вид первой версии Whisper: меню у края окна, панели в тонких рамках, плеер-полоса с красным отливом",
-      "version": "1.1",
+      "version": "1.3",
       "base": "neon",
       "file": "themes/whisper/whisper-old.wmt",
       "preview": "previews/whisper/whisper-old.jpg",
-      "size": 22987,
+      "size": 22937,
       "tags": [
         "тёмная",
         "классика",
