@@ -7,6 +7,7 @@
   "name": "Ночное небо",
   "author": "Whisper Music",
   "description": "Синий акцент и звёздный фон — пример темы",
+  "version": "1.1",
   "base": "neon",
   "preview": "asset:preview.png"
 }
@@ -665,3 +666,70 @@ IoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKE
 mAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYuNZFy3rdtZVcCs2IcRECDERQmyY5lc9A9ya
 TQgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQuwHdL4JwC/k
 fjIAAAAASUVORK5CYII=
+
+@@ settings whisper-obs
+{
+  "layout": "card",
+  "layouts": ["card", "compact"],
+  "opacity": 0.82
+}
+
+@@ css whisper-obs
+/* Ночное небо: капсула-небосвод с мерцающими звёздами и северным сиянием (визуализатор — занавеси сияния),
+   обложка — луна, по которой за время трека проходит тень (фазы луны), прогресс — созвездие со звездой-бегунком */
+#w { --r: 999px; min-width: 0; padding: 18px 44px 18px 22px; gap: 30px;
+  font-family: "Segoe UI Light", "Segoe UI", system-ui, sans-serif; color: #eaf3ff; }
+#w .w-bg {
+  border-radius: 999px; border: 1px solid rgba(111, 183, 255, .35);
+  background:
+    radial-gradient(1.2px 1.2px at 12% 30%, #fff 99%, transparent), radial-gradient(1px 1px at 22% 72%, #cfe6ff 99%, transparent),
+    radial-gradient(1.6px 1.6px at 41% 18%, #fff 99%, transparent), radial-gradient(1px 1px at 55% 80%, #fff 99%, transparent),
+    radial-gradient(1.3px 1.3px at 68% 26%, #e7f2ff 99%, transparent), radial-gradient(1px 1px at 83% 64%, #fff 99%, transparent),
+    radial-gradient(1.5px 1.5px at 92% 34%, #fff 99%, transparent), radial-gradient(1px 1px at 35% 52%, #9cc8ff 99%, transparent),
+    linear-gradient(180deg, rgba(4, 10, 32, var(--alpha)), rgba(16, 34, 86, var(--alpha)));
+  box-shadow: 0 0 34px rgba(42, 98, 201, .35), inset 0 0 30px rgba(0, 0, 0, .5);
+}
+/* второй слой звёзд мерцает */
+#w .w-bg::before { content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: .2;
+  background: radial-gradient(1.8px 1.8px at 30% 22%, #fff 99%, transparent), radial-gradient(1.4px 1.4px at 61% 58%, #fff 99%, transparent),
+    radial-gradient(1.8px 1.8px at 77% 14%, #fff 99%, transparent), radial-gradient(1.2px 1.2px at 47% 70%, #fff 99%, transparent); }
+#w[data-playing] .w-bg::before { animation: n-tw 3.2s ease-in-out infinite; }
+@keyframes n-tw { 50% { opacity: 1; } }
+/* северное сияние */
+#w .w-eq { display: none; }
+#w .w-viz { display: flex; position: absolute; inset: 0; height: auto; gap: 0; z-index: -1; border-radius: 999px; overflow: hidden;
+  align-items: flex-start; filter: blur(7px); opacity: .5; -webkit-mask: linear-gradient(90deg, transparent 18%, #000 45%, #000 85%, transparent);
+  mask: linear-gradient(90deg, transparent 18%, #000 45%, #000 85%, transparent); }
+#w .w-viz i { transform-origin: 50% 0; transform: scaleY(calc(.25 + var(--lv, .1) * var(--h, 1) * .75)); transition: transform .25s ease-out;
+  background: linear-gradient(180deg, rgba(61, 245, 196, .0), #3df5c4 25%, #6fb7ff 60%, rgba(111, 183, 255, 0)); }
+#w .w-viz i:nth-child(3n) { background: linear-gradient(180deg, transparent, #8a7dff 30%, #6fb7ff 65%, transparent); }
+/* луна с фазами */
+#w .w-art { width: 152px; height: 152px; border-radius: 50%; overflow: hidden;
+  box-shadow: 0 0 0 2px rgba(234, 243, 255, .2), 0 0 28px rgba(190, 220, 255, .5), 0 0 60px rgba(111, 183, 255, .25); }
+#w .w-cover { border-radius: 50%; box-shadow: none; }
+#w .w-art::after { content: ""; position: absolute; top: -6%; width: 112%; height: 112%; border-radius: 50%; pointer-events: none;
+  left: calc(-110% + var(--p) * 220%); background: rgba(3, 8, 28, .55); box-shadow: 0 0 14px 6px rgba(3, 8, 28, .45); }
+#w .w-info { flex: 1 1 auto; min-width: 0; gap: 3px; }
+#w .w-title { font-size: 30px; font-weight: 600; color: #fff; text-shadow: 0 0 12px rgba(160, 205, 255, .6); }
+#w .w-artist { font-size: 17px; color: #9cc8ff; opacity: 1; }
+/* созвездие */
+#w .w-bar { position: relative; height: 2px; margin-top: 22px; overflow: visible; border-radius: 0;
+  background: radial-gradient(circle, rgba(234, 243, 255, .7) 1.1px, transparent 1.5px) 0 50% / 11px 6px repeat-x; }
+#w .w-bar > i { border-radius: 2px; background: linear-gradient(90deg, rgba(111, 183, 255, .15), #d8ebff); box-shadow: 0 0 8px #6fb7ff; }
+#w .w-bar::after { content: ""; position: absolute; top: 50%; left: calc(var(--p) * 100%); width: 20px; height: 20px; translate: -50% -50%; background: #fff;
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 6px #9cc8ff); }
+#w[data-playing] .w-bar::after { animation: n-star 6s linear infinite; }
+@keyframes n-star { to { rotate: 360deg; } }
+#w .w-time { font-size: 13px; color: #9cc8ff; opacity: .8; margin-top: 10px; }
+/* падающая звезда */
+#w .w-deco { display: block; border-radius: 999px; overflow: hidden; }
+#w .w-deco i:nth-child(1) { top: 14px; left: 40%; width: 70px; height: 1.5px; rotate: -18deg; opacity: 0;
+  background: linear-gradient(90deg, transparent, #fff); }
+#w[data-playing] .w-deco i:nth-child(1) { animation: n-shoot 9s ease-in infinite 2s; }
+@keyframes n-shoot { 0%, 88% { opacity: 0; translate: 0 0; } 90% { opacity: 1; } 100% { opacity: 0; translate: 160px -50px; } }
+
+#w[data-layout="compact"] { padding: 10px 36px 10px 10px; gap: 18px; }
+#w[data-layout="compact"] .w-art { width: 76px; height: 76px; }
+#w[data-layout="compact"] .w-title { font-size: 22px; }
+#w[data-layout="compact"] .w-artist { font-size: 14px; }
+#w[data-layout="compact"] .w-art::after { display: none; }

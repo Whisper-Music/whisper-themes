@@ -12,7 +12,7 @@
   "name": "Терминал",
   "author": "Whisper Music",
   "description": "Командная строка вместо окна: help — список команд",
-  "version": "1.0",
+  "version": "1.1",
   "base": "neon",
   "apps": ["whisper-music", "whisper-obs"],
   "created": "2026-10-23T00:00:00Z"
@@ -87,14 +87,66 @@
 .modalbox .nav, .modalbox .field { border-radius: 0; }
 
 @@ settings whisper-obs
-{ "layout": "bar", "opacity": 0.75 }
+{
+  "layout": "card",
+  "layouts": ["card", "compact"],
+  "opacity": 0.92
+}
 
 @@ css whisper-obs
-/* виджет для OBS в духе терминала */
-.w { --r: 0px; font-family: "Cascadia Mono", Consolas, monospace; color: var(--a); }
-.w-bg { background: rgba(0, 6, 3, var(--alpha)); border: 1px solid color-mix(in srgb, var(--a) 55%, transparent); box-shadow: 0 0 18px color-mix(in srgb, var(--a) 25%, transparent); }
-.w-title, .w-artist { text-shadow: 0 0 6px color-mix(in srgb, var(--a) 60%, transparent); }
-.w-title::before { content: "> "; opacity: .7; }
-.w-bar { border-radius: 0; background: color-mix(in srgb, var(--a) 15%, transparent); }
-.w-bar i { border-radius: 0; background: var(--a); }
-.w-eq i { border-radius: 0; background: var(--a); }
+/* Терминал: окно эмулятора с тремя точками, команда в приглашении, обложка растром, прогресс [■■■···], мигающий курсор */
+#w { --r: 0; font-family: "Cascadia Mono", Consolas, "Lucida Console", monospace; color: #39ff7a; min-width: 0;
+  padding: 38px 22px 16px 18px; gap: 20px; align-items: flex-start; }
+#w .w-bg {
+  border-radius: 8px; border: 1px solid #1f5f35;
+  background:
+    linear-gradient(#1b1f1c, #131614) top / 100% 25px no-repeat,
+    repeating-linear-gradient(0deg, rgba(57, 255, 122, .04) 0 1px, transparent 1px 3px),
+    radial-gradient(120% 140% at 30% 30%, rgba(57, 255, 122, .07), transparent 60%),
+    rgba(3, 9, 5, var(--alpha));
+  box-shadow: 0 0 0 1px #000, 0 14px 30px rgba(0, 0, 0, .6), 0 0 26px rgba(57, 255, 122, .14);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+#w .w-bg::before { content: ""; position: absolute; left: 12px; top: 8px; width: 10px; height: 10px; border-radius: 50%;
+  background: #ff5f56; box-shadow: 16px 0 #ffbd2e, 32px 0 #27c93f; }
+#w .w-bg::after { content: "whisper@music: ~/now-playing"; position: absolute; left: 0; right: 0; top: 0; height: 25px;
+  font-size: 11px; line-height: 25px; text-align: center; color: #5f8a6d; }
+
+#w .w-art { width: 132px; height: 132px; margin-top: 4px; outline: 1px dashed rgba(57, 255, 122, .5); outline-offset: 4px; }
+#w .w-cover { border-radius: 0; box-shadow: none; filter: grayscale(1) contrast(1.6) brightness(1.15);
+  -webkit-mask: radial-gradient(circle, #000 1.05px, transparent 1.35px) 0 0 / 3px 3px; mask: radial-gradient(circle, #000 1.05px, transparent 1.35px) 0 0 / 3px 3px; }
+#w .w-art::after { content: ""; position: absolute; inset: 0; background: #39ff7a; mix-blend-mode: multiply; pointer-events: none; }
+
+#w .w-info { flex: 1 1 auto; gap: 2px; margin-top: 6px; }
+#w .w-info::before { content: "$ whisper --now-playing"; font-size: 13px; color: #39ff7a; opacity: .55; margin-bottom: 3px; }
+#w .w-title { font-size: 24px; font-weight: 700; color: #c6ffd8; text-shadow: 0 0 8px rgba(57, 255, 122, .55); }
+#w .w-title::before { content: "> "; color: #39ff7a; }
+#w .w-artist { font-size: 15px; color: #39ff7a; opacity: .8; text-shadow: none; }
+#w .w-artist::before { content: "  by "; white-space: pre; opacity: .6; }
+#w .w-bar { position: relative; margin: 14px 12px 0; height: 12px; border-radius: 0; overflow: visible;
+  background: repeating-linear-gradient(90deg, rgba(57, 255, 122, .18) 0 7px, transparent 7px 9px); }
+#w .w-bar::before, #w .w-bar::after { position: absolute; top: -4px; font-size: 14px; line-height: 18px; color: #39ff7a; }
+#w .w-bar::before { content: "["; left: -11px; }
+#w .w-bar::after { content: "]"; right: -11px; }
+#w .w-bar > i { border-radius: 0; box-shadow: none; background: repeating-linear-gradient(90deg, #39ff7a 0 7px, transparent 7px 9px);
+  filter: drop-shadow(0 0 3px rgba(57, 255, 122, .8)); }
+#w .w-time { font-size: 13px; opacity: 1; color: #7fe7a2; margin-top: 6px; justify-content: flex-start; gap: 0; }
+#w .w-cur::after { content: " / "; opacity: .5; }
+#w .w-dur::after { content: "▌"; margin-left: 8px; color: #39ff7a; animation: t-blink 1.06s steps(1) infinite; }
+@keyframes t-blink { 50% { opacity: 0; } }
+
+#w .w-eq { display: none; }
+#w .w-viz { display: flex; width: 96px; height: 110px; gap: 2px; align-self: flex-end; margin-bottom: 4px; }
+#w .w-viz i:nth-child(n + 13) { display: none; }
+#w .w-viz i { transform: none; align-self: flex-end; height: calc((.1 + var(--lv, .1) * var(--h, 1) * .9) * 100%); transition: height .1s linear;
+  background: repeating-linear-gradient(0deg, #39ff7a 0 4px, transparent 4px 6px) bottom / 100% 110px;
+  filter: drop-shadow(0 0 3px rgba(57, 255, 122, .6)); }
+
+#w[data-layout="compact"] { padding: 32px 18px 8px 14px; gap: 14px; }
+#w[data-layout="compact"] .w-art { width: 48px; height: 48px; margin-top: 2px; outline-offset: 3px; }
+#w[data-layout="compact"] .w-info { margin-top: 2px; }
+#w[data-layout="compact"] .w-info::before { display: none; }
+#w[data-layout="compact"] .w-title { font-size: 18px; }
+#w[data-layout="compact"] .w-artist { font-size: 13px; }
+#w[data-layout="compact"] .w-viz { height: 50px; width: 72px; margin-bottom: 2px; }
+#w[data-layout="compact"] .w-viz i:nth-child(n + 10) { display: none; }

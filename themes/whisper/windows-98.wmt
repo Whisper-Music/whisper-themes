@@ -9,7 +9,7 @@
   "name": "Windows 98",
   "author": "Whisper Music",
   "description": "Серые окна, синие заголовки, старые кнопки",
-  "version": "1.0",
+  "version": "1.1",
   "base": "neon",
   "apps": ["whisper-music"]
 }
@@ -331,3 +331,72 @@ input[type=color]::-webkit-color-swatch { border-radius: 0 !important; border: 0
 ::-webkit-scrollbar-corner { background: var(--w-face); }
 .main::-webkit-scrollbar { width: 16px; }
 .main::-webkit-scrollbar-thumb { background: var(--w-face); box-shadow: var(--w-raised); }
+
+@@ settings whisper-obs
+{
+  "layout": "card",
+  "layouts": ["card", "compact"],
+  "opacity": 1
+}
+
+@@ css whisper-obs
+/* Windows 98: настоящее окошко плеера — синий заголовок с кнопками, серые фаски, прогресс кубиками, строка состояния */
+#w { --r: 0; font-family: Tahoma, "MS Sans Serif", Verdana, sans-serif; color: #000; min-width: 0;
+  padding: 30px 12px 34px 12px; gap: 12px; align-items: flex-start; }
+#w .w-bg {
+  border-radius: 0; border: 0; background: rgba(192, 192, 192, var(--alpha));
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #fff, 5px 5px 0 rgba(0, 0, 0, .35);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+#w .w-bg::before {
+  content: "♫  Сейчас играет — Whisper Player"; position: absolute; left: 3px; right: 3px; top: 3px; height: 19px;
+  padding-left: 6px; font: bold 11px/19px Tahoma, sans-serif; color: #fff; white-space: nowrap; overflow: hidden;
+  background: linear-gradient(90deg, #000080, #1084d0);
+}
+/* кнопки заголовка: «×» — ::after, «_» и «□» — первые два .w-deco */
+#w .w-bg::after, #w .w-deco i:nth-child(-n + 2) {
+  content: "×"; position: absolute; top: 5px; width: 16px; height: 14px; background: #c0c0c0;
+  font: bold 12px/13px Tahoma, sans-serif; text-align: center; color: #000;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+}
+#w .w-bg::after { right: 5px; }
+#w .w-deco { display: block; }
+#w .w-deco i:nth-child(1) { right: 39px; }
+#w .w-deco i:nth-child(2) { right: 23px; }
+#w .w-deco i:nth-child(1)::before { content: ""; position: absolute; left: 4px; bottom: 3px; width: 6px; height: 2px; background: #000; }
+#w .w-deco i:nth-child(2)::before { content: ""; position: absolute; left: 3px; top: 2px; width: 8px; height: 7px; border: 1px solid #000; border-top-width: 2px; }
+
+#w .w-art { width: 120px; height: 120px; padding: 2px; background: #fff;
+  box-shadow: inset 1px 1px #808080, inset -1px -1px #fff, inset 2px 2px #0a0a0a, inset -2px -2px #dfdfdf; }
+#w .w-cover { border-radius: 0; box-shadow: none; }
+#w .w-info { flex: 1 1 auto; gap: 3px; margin-top: 4px; }
+#w .w-title { font-size: 16px; font-weight: 700; text-shadow: none; }
+#w .w-artist { font-size: 12px; opacity: 1; text-shadow: none; }
+#w .w-bar {
+  height: 22px; margin-top: 12px; padding: 3px 3px; border-radius: 0; background: #c0c0c0; box-sizing: border-box;
+  box-shadow: inset 1px 1px #808080, inset -1px -1px #fff;
+}
+#w .w-bar > i { border-radius: 0; box-shadow: none; background: repeating-linear-gradient(90deg, #000080 0 9px, transparent 9px 11px); }
+/* строка состояния внизу окна */
+#w .w-time { position: absolute; left: 4px; right: 4px; bottom: 4px; height: 20px; gap: 3px; justify-content: flex-start;
+  font-size: 11px; opacity: 1; }
+#w .w-time > span { flex: 1; line-height: 18px; padding: 0 6px; box-shadow: inset 1px 1px #808080, inset -1px -1px #fff; }
+#w .w-cur::before { content: "Прошло: "; }
+#w .w-dur::before { content: "Длина: "; }
+#w .w-dur { flex: 0 0 34% !important; }
+
+/* спектр в чёрном окошке, как в Winamp */
+#w .w-eq { display: none; }
+#w .w-viz { display: flex; width: 128px; height: 80px; padding: 3px; gap: 1px; background: #000; box-sizing: border-box; align-self: center;
+  box-shadow: inset 1px 1px #808080, inset -1px -1px #fff, inset 2px 2px #0a0a0a; }
+#w .w-viz i:nth-child(n + 21) { display: none; }
+#w .w-viz i { transform: none; align-self: flex-end; height: calc((.08 + var(--lv, .1) * var(--h, 1) * .92) * 100%); transition: height .1s linear;
+  background: linear-gradient(0deg, #00b000, #00e000 55%, #e0e000 78%, #ff2000) bottom / 100% 74px no-repeat;
+  -webkit-mask: repeating-linear-gradient(0deg, #000 0 2px, transparent 2px 3px); mask: repeating-linear-gradient(0deg, #000 0 2px, transparent 2px 3px); }
+
+#w[data-layout="compact"] { padding: 28px 10px 8px 10px; }
+#w[data-layout="compact"] .w-art { width: 52px; height: 52px; }
+#w[data-layout="compact"] .w-info { margin-top: 6px; }
+#w[data-layout="compact"] .w-title { font-size: 14px; }
+#w[data-layout="compact"] .w-viz { height: 56px; width: 92px; }
+#w[data-layout="compact"] .w-viz i:nth-child(n + 15) { display: none; }
